@@ -12,6 +12,12 @@
   tags:
     - facts
 
+- name: Set the ansible_python_interpreter fact
+  set_fact:
+    ansible_python_interpreter: "/usr/bin/python3"
+  tags:
+    - facts
+
 - name: Check http::proxy in /etc/apt/apt.conf
   raw: grep -qsi 'Acquire::http::proxy' /etc/apt/apt.conf
   register: need_http_proxy
@@ -60,8 +66,8 @@
     - need_bootstrap.rc != 0
 
 # Workaround for https://github.com/ansible/ansible/issues/25543
-- name: Install dbus for the hostname module
-  package:
-    name: dbus
-    state: present
-  become: true
+#- name: Install dbus for the hostname module
+#  package:
+#    name: dbus
+#    state: present
+#  become: true
