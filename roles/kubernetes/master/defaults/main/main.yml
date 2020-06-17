@@ -132,7 +132,11 @@ kube_webhook_token_auth: false
 kubelet_preferred_address_types: 'InternalDNS,InternalIP,Hostname,ExternalDNS,ExternalIP'
 
 ## Extra args for k8s components passing by kubeadm
-kube_kubeadm_apiserver_extra_args: {}
+## EDIT: https://github.com/istio/istio/issues/17378
+kube_kubeadm_apiserver_extra_args:
+  service-account-issuer: kubernetes.default.svc
+  service-account-signing-key-file: "/etc/kubernetes/ssl/sa.key"
+  service-account-api-audiences: api
 kube_kubeadm_controller_extra_args: {}
 kube_kubeadm_scheduler_extra_args: {}
 
